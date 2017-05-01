@@ -1,10 +1,13 @@
-<h1 width="100%"  align="middle">💲DOM</h1>
+<h1 width="100%"  align="middle">NAME OF YOUR MODULE</h1>
 
+<!-- Replace with your own logo -->
 <img src="https://cdn.rawgit.com/namshi/dollar-dom/master/dollar-symbol.svg" height="150" width="100%" align="middle"/>
 
-> 👬 A Friendly wrapper for your favourite DOM Apis ✨ in **800 bytes** ( minified + gzipped ) 🙌
+> 👬 Tell something about your npm-module here. With emojis  🙌
 
 <hr>
+
+<!-- change these -->
 
 [![Build Status](https://travis-ci.org/namshi/dollar-dom.svg?branch=master)](https://travis-ci.org/namshi/dollar-dom)
 [![Open Source Namshi](https://img.shields.io/badge/open--source-Namshi-blue.svg)](https://github.com/namshi)
@@ -14,205 +17,37 @@
 
 ## Why
 
-DollarDOM is not a polyfill or a new dom library. It's a simple wrapper for these mostly used DOM APIs:
-  - createElement
-  - querySelector 
-  - querySelectorAll
-  - addEventListener
-
-DollarDOM abstracts the above methods and provides a `$` object ( jQuery style ). It also has an `on` method which can be chained with the `$` selector function. Here is a simple example:
-
-```js
-var collection = document.querySelectorAll('.some-class');
-collection = [].slice.call(collection) // required for older browsers.
-collection.forEach( elem => {
-  elem.addEventListener('click', function(){
-    console.log(this.innerHTML);
-  }); 
-});
-```
- can be written as:
-
- ```js
- $('.some-class').on('click', function(){ 
-   console.log(this.innerHTML);
- });
- ```
-
- and in a better way, with event delegation:
-
- ```js
- $(document).on('click', '.some-class', function(){ 
-   console.log(this.innerHTML);
- });
- ```
-
-In bullet points, you can use DollarDOM, if:
-
-- you want a jQuery style API to manage DOM selectors and event handling
-- you need to use __[Event Delegation](https://learn.jquery.com/events/event-delegation/)__
-- you need to generate DOM from string
-- need to avoid the boilerplate code for above mentioned DOM APIs
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 ## Install
 
 using **npm**
 
-    npm install --save dollar-dom
+    npm install --save package-name
 
 using **yarn**
 
-    yarn add dollar-dom
+    yarn add package-name
 
-If you're using module bundlers like webpack, Browserify or rollup, you can import `$` from DollarDom module:
+If you're using module bundlers like webpack, Browserify or rollup, you can import `$` from **package-name** module:
 
 ```js
-import {$} from 'dollar-dom';
+import {$} from 'package-name';
 
 // or
 
-const {$} = require('dollar-dom');
+const {$} = require('package-name');
 ```
 
-If you wish to include as a script, DollarDOM can be included like this:
+If you wish to include as a script, **package-name** can be included like this:
 
-    <script src="https://unpkg.com/dollar-dom/build/dollar-dom.min.js"></script>
+    <script src="https://unpkg.com/package-name/build/package-name.min.js"></script>
 
-and will be available as a global object named **`dollarDom`** in the browser.
+and will be available as a global object named **`packageName`** in the browser.
 
 ## API and Examples
 
-### __`$`__
-
-- **Create DOM from string:**
-
-  Generating DOM from string is simple.
-
-  ```js
-  let newEl = $(`
-    <div class="parent">
-      <ul class="list">
-        <li class="child">1</li>
-        <li class="child">2</li>
-        <li class="child">3</li>
-        <li class="child">4</li>
-        <li class="child">5</li>
-      </ul>
-      <div class="section">
-        <span class="child">100</div>
-      </div>
-    </div>
-  `)
-
-  document.body.appendChild(newEl);
-  ```
-
-- **Single element selector ( same as querySelector ):**
-  
-  Let's try to find the element from the DOM we just created.
-
-  ```js
-  let parent = $('.parent');
-  console.log( parent.tagName ) // logs 'DIV'
-  ```
-
-  You can limit the selector to any parent element
-
-  ```js
-  let child = $('.child', '.section');
-  console.log( child.tagName ) // logs 'SPAN'
-
-  // works with a parent dom element too
-  let listElement = $('.list').get(0);
-  let child = $('.child', listElement);
-  console.log( child.tagName ) // logs 'LI'
-  ```
-- **Multiple elements selector ( same as querySelectorAll ):**
-
-  ```js
-  let children = $('.child');
-  children.forEach( child => {
-    console.log(child); // Logs LI, LI, LI, LI, LI, SPAN
-  });
-
-  // with a parent
-  let children = $('.child', '.section');
-  children.forEach( child => {
-    console.log(child); // Logs SPAN
-  });
-  ```
-
-- **Difference between a collection and a single element selector:**
-
-  By default, `$` returns a collection. But you can call any DOM element method on it, and it will be applied on the 
-  first element of the collection. However, if you call the `on` method ( which is dollarDOM specific ), it will be applied on all elements in the collection -- You can see that more in the `on` section.
-
-  Example:
-
-  ```js
-    let out = $('.child', '.list');
-    out.forEach( child => {
-      console.log(child.innerHTML); // Logs 1, 2, 3, 4, 5
-    });
-
-    out.innerHTML = 'Hello';
-
-    out.forEach( child => {
-      console.log(child.innerHTML); // Logs Hello, 2, 3, 4, 5
-    });
-    
-  ```
-
-### __`on`__
-
-- **Attach event handler:**
-
-  `$` makes attaching the event handler a lot easy. If you're coming from the jQuery world, there won't be any surprices.
-
-  ```js
-  // Events will be attached to each .child element
-  $('.child').on('click', function(e){
-    console.log( this.textContent ) // NOTE: "this" points to the element clicked. Make sure not to use arrow function as a handler
-    console.log( e ) // mouseClick event
-  });
-  ```
-
-- **Remove event handler:**
-
-  The output of the `on` method is a function which can be used to remove the attached event handlers.
-
-  ```js
-  let removeListeners = $('.child').on('click', function(e){
-    console.log( this.textContent );
-  });
-
-  // remove attached event handlers
-  removeListeners();
-  ```
-
-- **Event Delegation example:**
-
-  In the above examples, the 'click' event will be attached in each `.child` element. This is not performance friendly. DollarDOM has built-in event delegation support ( The syntax is similar to jQuery event delegation ). 
-
-  ```js
-  // Only one event will be attached to the .parent element
-  $('.parent').on('click', '.child', function(e){
-    console.log( this.textContent ); // on click of the .child, it's textContent will be logged.
-  });
-  ```
-
-### __`get`__
-
-- **Get the element from collection:**
-
-  `get` is a utility method to get a single element from the collection. It accept an `index` argument and the element in that position will be returned. 
-
-  ```js
-  let collection = $('.child');
-  // NOTE: index starts from 0
-  let spanElement = collection.get(5);
-  console.log( spanElement.textContent ) // Logs 100
-  ```
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 ## Want to Contribute ?
 
@@ -221,16 +56,17 @@ We love contributions from everyone.
   2. Install dependencies. `yarn install` or `npm install`
   3. We use `AVA` for unit tests. 
       - To run unit tests, `yarn test` or `npm test`
-      - To run unit test in --watch mode, `yarn test-w` or `npm run test-w`
+      - To run unit test in --watch mode, `yarn test-watch` or `npm run test-watch`
   4. Implement the changes, and write test cases. Make sure that all unit test pass.
   5. To generate the final build, run `yarn build` or `npm build`.
   6. Push your code and create a Pull Request
       
+## Release and publish to NPM
+
+*__Note:__ Make sure you're logged in to NPM before doing this.*
+
+To create a tag and publish to NPM run `npm run publish` or `yarn publish`. This will show an interactive session on terminal, where you can choose the semantic version to publish. After that, the github `release` page will be opened for adding the change logs.
 
 ## Licence
 
-MIT @ [Namshi.com](tech.namshi.com)
-
-#### Image Credits
-
-_<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>_
+MIT @ [YourCompany.com](www.yourcompany.com)

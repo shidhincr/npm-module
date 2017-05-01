@@ -17,6 +17,8 @@
 
 ## Why
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/shidhincr/npm-module.svg?token=4811e80eeb19bfd5667c92acb36fb814b5eede94cd8b20ead47fc6e9d92f7263&ts=1493651080191)](https://greenkeeper.io/)
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 ## Install

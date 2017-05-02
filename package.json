@@ -7,7 +7,7 @@
     "test": "ava --verbose",
     "test-watch": "ava --watch --verbose",
     "build": "rollup -c",
-    "publish": "np && release"
+    "release": "np && release"
   },
   "repository": {
     "type": "git",

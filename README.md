@@ -29,14 +29,14 @@ using **yarn**
 
     yarn add package-name
 
-If you're using module bundlers like webpack, Browserify or rollup, you can import `$` from **package-name** module:
+If you're using module bundlers like webpack, Browserify or rollup, you can import `greet` from **package-name** module:
 
 ```js
-import {$} from 'package-name';
+import {greet} from 'package-name';
 
 // or
 
-const {$} = require('package-name');
+const {greet} = require('package-name');
 ```
 
 If you wish to include as a script, **package-name** can be included like this:
@@ -65,7 +65,7 @@ We love contributions from everyone.
 
 *__Note:__ Make sure you're logged in to NPM before doing this.*
 
-To create a tag and publish to NPM run `npm run publish` or `yarn publish`. This will show an interactive session on terminal, where you can choose the semantic version to publish. After that, the github `release` page will be opened for adding the change logs.
+To create a tag and publish to NPM run `npm run release` or `yarn release`. This will show an interactive session on terminal, where you can choose the semantic version to publish. After that, the github `release` page will be opened for adding the change logs.
 
 ## Licence
 
